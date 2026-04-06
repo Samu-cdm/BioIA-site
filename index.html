@@ -1,208 +1,816 @@
-export default function QuimIAProjectSite() {
-  const questions = [
-    {
-      pergunta: 'Balanceie a equação: H₂ + O₂ → H₂O',
-      resposta: '2H₂ + O₂ → 2H₂O',
-      acertou: 'Mostra corretamente a conservação dos átomos e o uso de coeficientes.',
-      limite: 'O aluno ainda precisa entender por que a fórmula das substâncias não pode ser alterada.'
-    },
-    {
-      pergunta: 'O que é uma reação química?',
-      resposta: 'É uma transformação em que substâncias iniciais se transformam em novas substâncias.',
-      acertou: 'Apresenta a ideia central de transformação da matéria.',
-      limite: 'Pode ficar superficial se não explicar evidências ou exemplos do cotidiano.'
-    },
-    {
-      pergunta: 'A ferrugem é uma reação química?',
-      resposta: 'Sim. A ferrugem é resultado da oxidação do ferro.',
-      acertou: 'Relaciona o conteúdo com um fenômeno do cotidiano.',
-      limite: 'Precisa de conferência para aprofundar as condições da reação.'
-    },
-    {
-      pergunta: 'Qual a diferença entre ligação iônica e covalente?',
-      resposta: 'Na iônica há transferência de elétrons; na covalente há compartilhamento.',
-      acertou: 'Resume corretamente a diferença principal entre os tipos de ligação.',
-      limite: 'Pode simplificar demais se não trouxer exemplos corretos.'
-    },
-    {
-      pergunta: 'Para que serve a tabela periódica?',
-      resposta: 'Ela organiza os elementos químicos de acordo com suas propriedades e estrutura atômica.',
-      acertou: 'Ajuda a entender grupos, períodos e tendências periódicas.',
-      limite: 'Ainda exige estudo para interpretar propriedades com segurança.'
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BioIA | IA nos Estudos de Biologia</title>
+  <style>
+    :root{
+      --bg:#07111f;
+      --bg2:#0c1b33;
+      --card:rgba(9,20,39,.88);
+      --line:rgba(110,168,255,.14);
+      --text:#eef5ff;
+      --muted:#b6c5d9;
+      --cyan:#47d7ff;
+      --cyan2:#9cf1ff;
+      --green:#4ade80;
+      --red:#fb7185;
+      --yellow:#facc15;
+      --shadow:0 20px 60px rgba(0,0,0,.35);
     }
-  ];
 
-  const cards = [
-    {
-      title: 'Balanceamento de equações',
-      text: 'A IA pode mostrar o passo a passo do balanceamento e reforçar a Lei da Conservação da Massa.'
-    },
-    {
-      title: 'Reações no cotidiano',
-      text: 'A IA ajuda a relacionar ferrugem, combustão, fermentação e digestão com conceitos químicos.'
-    },
-    {
-      title: 'Tabela periódica',
-      text: 'A IA pode organizar grupos, períodos, propriedades e diferenças entre metais, ametais e gases nobres.'
+    *{box-sizing:border-box;scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Arial,Helvetica,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top, rgba(71,215,255,.10), transparent 30%),
+        linear-gradient(180deg,#030915 0%, #071426 35%, #08182d 100%);
     }
-  ];
 
-  const checklist = [
-    'Já tentei resolver sozinho antes de usar a IA?',
-    'A resposta faz sentido para mim ou eu só li sem entender?',
-    'Consigo explicar com minhas próprias palavras?',
-    'Confirmei a resposta no caderno, livro ou com o professor?',
-    'Consigo resolver um exercício parecido sem ajuda?'
-  ];
+    a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
 
-  return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
-      <header className="border-b border-slate-800 bg-gradient-to-b from-cyan-950/40 to-slate-950">
-        <div className="mx-auto max-w-6xl px-6 py-16">
-          <div className="inline-block rounded-full border border-cyan-400/30 bg-cyan-400/10 px-4 py-1 text-sm text-cyan-300">
-            Projeto Interdisciplinar • Química
-          </div>
-          <h1 className="mt-5 text-4xl font-bold tracking-tight md:text-6xl">
-            QuimIA
-          </h1>
-          <p className="mt-4 max-w-3xl text-lg text-slate-300 md:text-xl">
-            IA nos Estudos de Química: como usar de forma consciente, crítica e eficiente.
-          </p>
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
-            <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5 shadow-lg">
-              <p className="text-sm text-slate-400">Grupo</p>
-              <p className="mt-1 text-base font-medium">Adicionar nomes do grupo aqui</p>
-            </div>
-            <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5 shadow-lg">
-              <p className="text-sm text-slate-400">Turma</p>
-              <p className="mt-1 text-base font-medium">Adicionar turma</p>
-            </div>
-            <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5 shadow-lg">
-              <p className="text-sm text-slate-400">Disciplina</p>
-              <p className="mt-1 text-base font-medium">Química</p>
-            </div>
-          </div>
-        </div>
-      </header>
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      backdrop-filter:blur(10px);
+      background:rgba(4,11,23,.78);
+      border-bottom:1px solid var(--line);
+    }
 
-      <main className="mx-auto max-w-6xl space-y-14 px-6 py-12">
-        <section className="grid gap-6 md:grid-cols-2">
-          <div className="rounded-3xl border border-slate-800 bg-slate-900 p-7 shadow-xl">
-            <h2 className="text-2xl font-semibold">O que é IA?</h2>
-            <p className="mt-4 leading-7 text-slate-300">
-              A Inteligência Artificial é uma tecnologia capaz de analisar informações e gerar respostas, simulando parte do raciocínio humano. Nos estudos, ela pode ajudar a explicar conteúdos, resolver exercícios e organizar o aprendizado.
-            </p>
-          </div>
-          <div className="rounded-3xl border border-slate-800 bg-slate-900 p-7 shadow-xl">
-            <h2 className="text-2xl font-semibold">Como ela pode ajudar?</h2>
-            <ul className="mt-4 space-y-3 text-slate-300">
-              <li>• Explicar conteúdos difíceis de forma mais simples</li>
-              <li>• Resolver exercícios passo a passo</li>
-              <li>• Gerar exemplos e resumos</li>
-              <li>• Organizar revisões e listas de treino</li>
-            </ul>
-          </div>
-        </section>
+    .nav-inner{
+      max-width:1180px;
+      margin:0 auto;
+      padding:14px 20px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+    }
 
-        <section className="rounded-3xl border border-slate-800 bg-slate-900 p-8 shadow-xl">
-          <h2 className="text-3xl font-semibold">Como a IA ajuda em Química</h2>
-          <p className="mt-3 max-w-3xl text-slate-300">
-            Na Química, a IA pode auxiliar na compreensão de equações, reações químicas e propriedades dos elementos. Porém, o uso correto exige conferência, interpretação e autonomia do aluno.
-          </p>
-          <div className="mt-8 grid gap-5 md:grid-cols-3">
-            {cards.map((card) => (
-              <div key={card.title} className="rounded-2xl border border-slate-800 bg-slate-950 p-6">
-                <h3 className="text-xl font-semibold text-cyan-300">{card.title}</h3>
-                <p className="mt-3 leading-7 text-slate-300">{card.text}</p>
-              </div>
-            ))}
-          </div>
-        </section>
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:800;
+      color:var(--cyan);
+      font-size:1.25rem;
+    }
 
-        <section className="grid gap-6 md:grid-cols-2">
-          <div className="rounded-3xl border border-emerald-500/20 bg-emerald-500/5 p-8 shadow-xl">
-            <h2 className="text-2xl font-semibold text-emerald-300">Uso correto</h2>
-            <ul className="mt-4 space-y-3 text-slate-200">
-              <li>• Usar a IA para entender o conteúdo</li>
-              <li>• Pedir explicações com exemplos</li>
-              <li>• Conferir as respostas em fontes confiáveis</li>
-              <li>• Resolver exercícios parecidos sozinho depois</li>
-            </ul>
-          </div>
-          <div className="rounded-3xl border border-rose-500/20 bg-rose-500/5 p-8 shadow-xl">
-            <h2 className="text-2xl font-semibold text-rose-300">Uso incorreto</h2>
-            <ul className="mt-4 space-y-3 text-slate-200">
-              <li>• Copiar respostas sem compreender</li>
-              <li>• Confiar na IA sem verificar</li>
-              <li>• Substituir o estudo pelo atalho</li>
-              <li>• Ler a explicação sem conseguir refazer sozinho</li>
-            </ul>
-          </div>
-        </section>
+    .brand img{
+      width:42px;
+      height:42px;
+      object-fit:contain;
+      border-radius:12px;
+      background:rgba(255,255,255,.04);
+      padding:4px;
+      border:1px solid var(--line);
+    }
 
-        <section className="rounded-3xl border border-slate-800 bg-slate-900 p-8 shadow-xl">
-          <h2 className="text-3xl font-semibold">Teste prático com IA</h2>
-          <p className="mt-3 max-w-3xl text-slate-300">
-            O grupo analisou perguntas de Química para observar acertos, limitações e a necessidade de conferência das respostas.
-          </p>
-          <div className="mt-8 space-y-5">
-            {questions.map((item, index) => (
-              <div key={index} className="rounded-2xl border border-slate-800 bg-slate-950 p-6">
-                <p className="text-sm font-medium uppercase tracking-wide text-cyan-300">Pergunta {index + 1}</p>
-                <h3 className="mt-2 text-xl font-semibold">{item.pergunta}</h3>
-                <p className="mt-4 text-slate-300"><span className="font-semibold text-slate-100">Resposta da IA:</span> {item.resposta}</p>
-                <p className="mt-3 text-slate-300"><span className="font-semibold text-emerald-300">Onde acertou:</span> {item.acertou}</p>
-                <p className="mt-3 text-slate-300"><span className="font-semibold text-amber-300">Limitação:</span> {item.limite}</p>
-              </div>
-            ))}
-          </div>
-        </section>
+    .nav-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:18px;
+      color:var(--muted);
+      font-size:.95rem;
+    }
 
-        <section className="grid gap-6 md:grid-cols-2">
-          <div className="rounded-3xl border border-slate-800 bg-slate-900 p-8 shadow-xl">
-            <h2 className="text-2xl font-semibold">Limitações da IA</h2>
-            <ul className="mt-4 space-y-3 text-slate-300">
-              <li>• Pode errar mesmo parecendo convincente</li>
-              <li>• Pode simplificar demais conteúdos importantes</li>
-              <li>• Não conhece exatamente a prova nem o professor</li>
-              <li>• Não substitui o raciocínio do aluno</li>
-            </ul>
-          </div>
-          <div className="rounded-3xl border border-slate-800 bg-slate-900 p-8 shadow-xl">
-            <h2 className="text-2xl font-semibold">Como verificar a resposta</h2>
-            <ul className="mt-4 space-y-3 text-slate-300">
-              <li>• Comparar com o livro, caderno e material da escola</li>
-              <li>• Testar a explicação em exercícios parecidos</li>
-              <li>• Perguntar ao professor em caso de dúvida</li>
-              <li>• Ver se consegue explicar com as próprias palavras</li>
-            </ul>
-          </div>
-        </section>
+    .nav-links a:hover{color:var(--cyan2)}
 
-        <section className="rounded-3xl border border-slate-800 bg-slate-900 p-8 shadow-xl">
-          <h2 className="text-3xl font-semibold">Guia rápido de uso consciente</h2>
-          <div className="mt-6 grid gap-6 md:grid-cols-5">
-            {checklist.map((item) => (
-              <div key={item} className="rounded-2xl border border-slate-800 bg-slate-950 p-5 text-slate-300">
-                {item}
-              </div>
-            ))}
-          </div>
-        </section>
+    .hero{
+      max-width:1180px;
+      margin:0 auto;
+      padding:70px 20px 40px;
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:24px;
+      align-items:stretch;
+    }
 
-        <section className="rounded-3xl border border-cyan-400/20 bg-cyan-400/5 p-8 shadow-xl">
-          <h2 className="text-3xl font-semibold">Conclusão</h2>
-          <p className="mt-4 max-w-4xl leading-8 text-slate-200">
-            A IA pode ser uma ferramenta valiosa para o estudo de Química quando é usada para explicar, organizar e revisar conteúdos. No entanto, ela não substitui a aprendizagem real. O aluno precisa interpretar, conferir e praticar sozinho. Portanto, o uso consciente da IA depende de autonomia, responsabilidade e pensamento crítico.
-          </p>
-        </section>
-      </main>
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+    }
 
-      <footer className="border-t border-slate-800 bg-slate-950">
-        <div className="mx-auto max-w-6xl px-6 py-8 text-sm text-slate-400">
-          Projeto escolar sobre IA nos estudos • Química • QuimIA
-        </div>
-      </footer>
+    .hero-main{padding:34px}
+    .badge{
+      display:inline-block;
+      padding:8px 14px;
+      border-radius:999px;
+      background:rgba(71,215,255,.12);
+      color:var(--cyan2);
+      border:1px solid rgba(71,215,255,.18);
+      font-weight:700;
+      font-size:.9rem;
+    }
+
+    h1{
+      margin:18px 0 10px;
+      font-size:3.3rem;
+      line-height:1;
+      letter-spacing:-1px;
+    }
+
+    h1 span{color:var(--cyan)}
+    .hero-main p{
+      color:var(--muted);
+      font-size:1.05rem;
+      line-height:1.75;
+      margin:0;
+    }
+
+    .hero-grid{
+      margin-top:24px;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+    }
+
+    .mini{
+      padding:16px;
+      border-radius:18px;
+      background:rgba(6,14,28,.9);
+      border:1px solid var(--line);
+    }
+
+    .mini strong{
+      display:block;
+      margin-bottom:6px;
+      color:var(--cyan2);
+      font-size:.9rem;
+    }
+
+    .hero-side{
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .hero-image{
+      min-height:260px;
+      background:
+        linear-gradient(rgba(7,17,31,.35), rgba(7,17,31,.65)),
+        url('images/hero-bio.jpg') center/cover no-repeat;
+      border-bottom:1px solid var(--line);
+    }
+
+    .hero-side-content{padding:26px}
+    .hero-side-content h3{
+      margin:0 0 12px;
+      color:var(--cyan2);
+      font-size:1.45rem;
+    }
+
+    .hero-side-content ul{
+      margin:0;
+      padding-left:18px;
+      color:var(--muted);
+      line-height:1.8;
+    }
+
+    .section{
+      max-width:1180px;
+      margin:0 auto;
+      padding:18px 20px 28px;
+    }
+
+    .section-title{
+      margin:0 0 14px;
+      font-size:2rem;
+      letter-spacing:-.4px;
+    }
+
+    .section-sub{
+      max-width:920px;
+      margin:0 0 26px;
+      color:var(--muted);
+      line-height:1.75;
+    }
+
+    .cards-3{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+
+    .info-card{
+      padding:24px;
+    }
+
+    .info-card h3{
+      margin:0 0 10px;
+      color:var(--cyan2);
+      font-size:1.2rem;
+    }
+
+    .info-card p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.75;
+    }
+
+    .split{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+    }
+
+    .good{
+      background:linear-gradient(180deg, rgba(74,222,128,.07), rgba(9,20,39,.95));
+      border:1px solid rgba(74,222,128,.18);
+    }
+
+    .bad{
+      background:linear-gradient(180deg, rgba(251,113,133,.07), rgba(9,20,39,.95));
+      border:1px solid rgba(251,113,133,.18);
+    }
+
+    .good h3{color:var(--green)}
+    .bad h3{color:var(--red)}
+
+    .panel{padding:26px}
+    .panel ul{
+      margin:0;
+      padding-left:18px;
+      color:var(--muted);
+      line-height:1.8;
+    }
+
+    .tests{display:grid;gap:18px}
+    .test-card{padding:24px}
+    .test-card h3{
+      margin:0 0 10px;
+      color:var(--cyan2);
+      font-size:1.16rem;
+    }
+
+    .tag{
+      display:inline-block;
+      margin-top:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      background:rgba(71,215,255,.10);
+      border:1px solid rgba(71,215,255,.16);
+      color:var(--cyan2);
+      font-size:.82rem;
+      font-weight:700;
+    }
+
+    .test-card p{
+      margin:10px 0 0;
+      color:var(--muted);
+      line-height:1.75;
+    }
+
+    .grid-2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+    }
+
+    .gallery{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:18px;
+    }
+
+    .gallery-item{
+      overflow:hidden;
+    }
+
+    .gallery-item img{
+      width:100%;
+      height:260px;
+      object-fit:cover;
+      border-bottom:1px solid var(--line);
+    }
+
+    .gallery-item .cap{
+      padding:16px;
+      color:var(--muted);
+      line-height:1.65;
+    }
+
+    .simulator{
+      padding:26px;
+    }
+
+    .simulator textarea{
+      width:100%;
+      min-height:110px;
+      resize:vertical;
+      padding:14px 16px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background:rgba(5,12,24,.95);
+      color:var(--text);
+      font-size:1rem;
+      outline:none;
+    }
+
+    .simulator button{
+      margin-top:14px;
+      padding:12px 18px;
+      border:none;
+      border-radius:14px;
+      background:linear-gradient(135deg,var(--cyan),#1fa8ff);
+      color:#021220;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    .simulator button:hover{opacity:.92}
+    .result{
+      margin-top:18px;
+      padding:18px;
+      border-radius:18px;
+      background:rgba(71,215,255,.08);
+      border:1px solid rgba(71,215,255,.16);
+      color:var(--muted);
+      line-height:1.75;
+    }
+
+    .check-grid{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:14px;
+      margin-top:18px;
+    }
+
+    .check-card{
+      padding:18px;
+      border-radius:18px;
+      background:rgba(6,14,28,.94);
+      border:1px solid var(--line);
+    }
+
+    .check-card label{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      color:var(--muted);
+      line-height:1.55;
+      cursor:pointer;
+    }
+
+    .check-card input{
+      margin-top:3px;
+      accent-color:var(--cyan);
+      transform:scale(1.12);
+    }
+
+    .progress-box{
+      margin-top:18px;
+      padding:18px;
+      border-radius:18px;
+      background:rgba(71,215,255,.08);
+      border:1px solid rgba(71,215,255,.16);
+      color:var(--muted);
+    }
+
+    .progress-number{
+      font-size:1.8rem;
+      color:var(--cyan);
+      font-weight:800;
+    }
+
+    .conclusion{
+      padding:30px;
+      background:
+        linear-gradient(135deg, rgba(71,215,255,.12), rgba(8,24,45,.95)),
+        var(--card);
+    }
+
+    .conclusion p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.85;
+    }
+
+    footer{
+      max-width:1180px;
+      margin:0 auto;
+      padding:22px 20px 40px;
+      color:#94a8c0;
+      font-size:.92rem;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+
+    .footer-school{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .footer-school img{
+      width:42px;
+      height:42px;
+      object-fit:contain;
+      border-radius:10px;
+      background:rgba(255,255,255,.04);
+      padding:4px;
+      border:1px solid var(--line);
+    }
+
+    .top-btn{
+      position:fixed;
+      right:20px;
+      bottom:20px;
+      width:48px;
+      height:48px;
+      border:none;
+      border-radius:999px;
+      background:rgba(71,215,255,.15);
+      color:var(--cyan2);
+      border:1px solid rgba(71,215,255,.25);
+      cursor:pointer;
+      box-shadow:var(--shadow);
+      font-size:1.1rem;
+    }
+
+    @media (max-width:980px){
+      .hero,
+      .cards-3,
+      .split,
+      .grid-2,
+      .gallery,
+      .check-grid{
+        grid-template-columns:1fr;
+      }
+
+      .hero-grid{
+        grid-template-columns:1fr;
+      }
+
+      .nav-inner{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      h1{font-size:2.35rem}
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="brand">
+        <img src="images/logo-bioia.png" alt="Logo BioIA">
+        <span>BioIA</span>
+      </div>
+
+      <div class="nav-links">
+        <a href="#conceito">Conceito</a>
+        <a href="#biologia">Biologia</a>
+        <a href="#usos">Usos</a>
+        <a href="#teste">Teste prático</a>
+        <a href="#comparacao">Comparação</a>
+        <a href="#simulador">Simulador</a>
+        <a href="#guia">Guia</a>
+        <a href="#conclusao">Conclusão</a>
+      </div>
     </div>
-  );
-}
+  </nav>
+
+  <header class="hero">
+    <div class="card hero-main">
+      <span class="badge">Projeto Interdisciplinar • Biologia</span>
+      <h1><span>BioIA</span><br>IA nos Estudos de Biologia</h1>
+      <p>
+        Este projeto investiga como a Inteligência Artificial pode ser usada de forma consciente, crítica e eficiente no estudo da Biologia. O foco não é copiar respostas, mas entender conteúdos, organizar conceitos complexos e verificar se a aprendizagem realmente aconteceu.
+      </p>
+
+      <div class="hero-grid">
+        <div class="mini">
+          <strong>Grupo</strong>
+          Samuel Batista Machado, Hiago Freire dos Santos, João Henrique Lopes Angelote, Enzo Expedito Briano Beras, Levy Guedes Rocha, Hiago Azevedo Santiago de Souza, Matheus Montenegro Santiago, Kevin do Nascimento Eduardo, Pedro Rafael, Gustavo Correia Rodrigues, Julia Martins, Marianna Ferreira
+        </div>
+        <div class="mini">
+          <strong>Turma</strong>
+          3 Urano
+        </div>
+        <div class="mini">
+          <strong>Escola</strong>
+          Colégio Cometa
+        </div>
+      </div>
+    </div>
+
+    <aside class="card hero-side">
+      <div class="hero-image"></div>
+      <div class="hero-side-content">
+        <h3>Ideia central</h3>
+        <ul>
+          <li>A IA pode ajudar na explicação de processos biológicos e conceitos complexos.</li>
+          <li>Ela organiza etapas, resume conteúdos e facilita revisões.</li>
+          <li>Mas pode ser superficial, errar detalhes ou parecer convincente sem estar completa.</li>
+          <li>Por isso, o aluno precisa conferir, interpretar e praticar sozinho.</li>
+        </ul>
+      </div>
+    </aside>
+  </header>
+
+  <section class="section" id="conceito">
+    <h2 class="section-title">O que é IA?</h2>
+    <p class="section-sub">
+      A Inteligência Artificial é uma tecnologia capaz de analisar informações e gerar respostas a partir de padrões. Nos estudos, ela pode explicar conteúdos, organizar ideias, produzir resumos, criar exemplos e responder dúvidas. Mesmo assim, a responsabilidade pelo aprendizado continua sendo do aluno, porque a IA pode errar ou simplificar demais.
+    </p>
+  </section>
+
+  <section class="section" id="biologia">
+    <h2 class="section-title">Como a IA ajuda em Biologia</h2>
+    <p class="section-sub">
+      Na Biologia, a IA pode ser especialmente útil para explicar processos biológicos, organizar conceitos mais complexos e comparar conhecimento científico com senso comum. Isso se encaixa diretamente na proposta do trabalho.
+    </p>
+
+    <div class="cards-3">
+      <div class="card info-card">
+        <h3>Processos biológicos</h3>
+        <p>
+          A IA pode explicar temas como fotossíntese, respiração celular, digestão e circulação, organizando as etapas de forma mais clara e facilitando a compreensão do aluno.
+        </p>
+      </div>
+
+      <div class="card info-card">
+        <h3>Organização de conceitos</h3>
+        <p>
+          Conceitos como DNA, hereditariedade, mitose, meiose e metabolismo podem ser organizados em explicações mais simples, tabelas comparativas e resumos.
+        </p>
+      </div>
+
+      <div class="card info-card">
+        <h3>Ciência x senso comum</h3>
+        <p>
+          A IA pode ajudar a comparar ideias equivocadas com explicações científicas, como no caso da crença de que suar mais significa emagrecer mais.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="usos">
+    <h2 class="section-title">Uso correto x uso incorreto da IA</h2>
+    <div class="split">
+      <div class="card info-card good">
+        <h3>Uso correto</h3>
+        <p>
+          Usar a IA para entender melhor um conteúdo, pedir explicações em linguagem simples, organizar conceitos, revisar assuntos e depois tentar resolver sozinho.
+        </p>
+      </div>
+
+      <div class="card info-card bad">
+        <h3>Uso incorreto</h3>
+        <p>
+          Copiar respostas sem compreender, confiar totalmente sem verificar, deixar de pensar e usar a IA como substituta do estudo e da explicação do professor.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="teste">
+    <h2 class="section-title">Teste prático com IA</h2>
+    <p class="section-sub">
+      O grupo fez perguntas para diferentes IAs e analisou a qualidade das respostas. O objetivo foi identificar onde a IA acertou, onde foi superficial e onde a conferência foi necessária.
+    </p>
+
+    <div class="tests">
+      <div class="card test-card">
+        <h3>1. O que é fotossíntese?</h3>
+        <span class="tag">Resposta da IA: processo em que plantas produzem alimento usando luz solar</span>
+        <p><strong>Onde acertou:</strong> apresentou a ideia central do processo.</p>
+        <p><strong>Limitação:</strong> algumas respostas simplificam demais e não explicam o papel da água, do gás carbônico e da glicose.</p>
+      </div>
+
+      <div class="card test-card">
+        <h3>2. Explique a respiração celular em etapas</h3>
+        <span class="tag">Resposta da IA: quebra da glicose para produção de energia</span>
+        <p><strong>Onde acertou:</strong> relacionou o processo à produção de ATP e energia celular.</p>
+        <p><strong>Limitação:</strong> pode não detalhar bem glicólise, ciclo de Krebs e cadeia respiratória.</p>
+      </div>
+
+      <div class="card test-card">
+        <h3>3. O que é DNA?</h3>
+        <span class="tag">Resposta da IA: molécula que contém informações genéticas</span>
+        <p><strong>Onde acertou:</strong> explicou a função do DNA de forma compreensível.</p>
+        <p><strong>Limitação:</strong> algumas respostas ficam genéricas e não relacionam o tema com hereditariedade e síntese de proteínas.</p>
+      </div>
+
+      <div class="card test-card">
+        <h3>4. Suar mais emagrece mais?</h3>
+        <span class="tag">Resposta da IA: não; suor representa perda de água, não de gordura</span>
+        <p><strong>Onde acertou:</strong> comparou senso comum com conhecimento científico.</p>
+        <p><strong>Limitação:</strong> exige conferência e aprofundamento sobre gasto calórico e metabolismo.</p>
+      </div>
+
+      <div class="card test-card">
+        <h3>5. Diferença entre mitose e meiose</h3>
+        <span class="tag">Resposta da IA: mitose gera células iguais; meiose gera células com metade dos cromossomos</span>
+        <p><strong>Onde acertou:</strong> mostrou a diferença principal entre os processos.</p>
+        <p><strong>Limitação:</strong> pode não explicar bem o objetivo biológico de cada divisão.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="comparacao">
+    <h2 class="section-title">Comparação entre IAs</h2>
+    <p class="section-sub">
+      Além do conteúdo em texto, o grupo também analisou respostas reais de diferentes IAs. Essa comparação mostra que a qualidade da resposta depende tanto da ferramenta quanto da forma como a pergunta é feita.
+    </p>
+
+    <div class="gallery">
+      <div class="card gallery-item">
+        <img src="images/ia1.png" alt="Print de IA 1">
+        <div class="cap">
+          <strong>Exemplo 1</strong><br>
+          Resposta analisada pelo grupo para observar clareza, organização e profundidade.
+        </div>
+      </div>
+
+      <div class="card gallery-item">
+        <img src="images/ia2.png" alt="Print de IA 2">
+        <div class="cap">
+          <strong>Exemplo 2</strong><br>
+          Comparação entre diferentes estilos de explicação para o mesmo conteúdo biológico.
+        </div>
+      </div>
+
+      <div class="card gallery-item">
+        <img src="images/ia3.png" alt="Print de IA 3">
+        <div class="cap">
+          <strong>Exemplo 3</strong><br>
+          Print usado para avaliar se a IA realmente explicou ou apenas resumiu de forma vaga.
+        </div>
+      </div>
+
+      <div class="card gallery-item">
+        <img src="images/ia4.png" alt="Print de IA 4">
+        <div class="cap">
+          <strong>Exemplo 4</strong><br>
+          Evidência prática de que perguntas melhores geram respostas melhores.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="simulador">
+    <h2 class="section-title">Simulador de pergunta inteligente</h2>
+    <p class="section-sub">
+      Esta ferramenta mostra como transformar perguntas vagas em perguntas melhores para a IA. Assim, o aluno aprende não só o conteúdo, mas também a usar a ferramenta de forma mais eficiente.
+    </p>
+
+    <div class="card simulator">
+      <textarea id="userQuestion" placeholder="Digite uma pergunta de Biologia. Ex: explica fotossíntese"></textarea>
+      <button onclick="melhorarPergunta()">Melhorar pergunta</button>
+      <div class="result" id="resultBox">
+        Digite uma pergunta acima. O site vai sugerir uma forma melhor de perguntar para obter respostas mais úteis.
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="verificacao">
+    <h2 class="section-title">Limitações da IA e verificação das respostas</h2>
+    <div class="grid-2">
+      <div class="card panel">
+        <h3 style="margin-top:0;color:var(--yellow)">Limitações da IA</h3>
+        <ul>
+          <li>Pode errar mesmo quando a resposta parece convincente.</li>
+          <li>Pode simplificar demais assuntos importantes.</li>
+          <li>Nem sempre aprofunda o conceito biológico.</li>
+          <li>Não conhece exatamente o professor, a prova ou o material da turma.</li>
+          <li>Não substitui o pensamento crítico do aluno.</li>
+        </ul>
+      </div>
+
+      <div class="card panel">
+        <h3 style="margin-top:0;color:var(--cyan2)">Como verificar se a resposta está correta</h3>
+        <ul>
+          <li>Comparar com o livro, caderno e material da escola.</li>
+          <li>Testar a explicação em exercícios parecidos.</li>
+          <li>Perguntar ao professor em caso de dúvida.</li>
+          <li>Ver se a explicação faz sentido com o conteúdo estudado.</li>
+          <li>Confirmar se você consegue explicar com suas próprias palavras.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="guia">
+    <h2 class="section-title">Guia rápido de uso consciente</h2>
+    <p class="section-sub">
+      Marque os itens abaixo e veja se você realmente usou a IA para aprender, e não apenas para copiar.
+    </p>
+
+    <div class="check-grid">
+      <div class="check-card">
+        <label><input type="checkbox" class="check-item"> Já tentei resolver ou estudar isso sozinho antes de usar a IA?</label>
+      </div>
+      <div class="check-card">
+        <label><input type="checkbox" class="check-item"> A resposta fez sentido para mim ou eu apenas li rapidamente?</label>
+      </div>
+      <div class="check-card">
+        <label><input type="checkbox" class="check-item"> Consigo explicar esse assunto com minhas próprias palavras?</label>
+      </div>
+      <div class="check-card">
+        <label><input type="checkbox" class="check-item"> Comparei a resposta com o livro, caderno ou professor?</label>
+      </div>
+      <div class="check-card">
+        <label><input type="checkbox" class="check-item"> Consigo resolver uma questão parecida sem ajuda?</label>
+      </div>
+    </div>
+
+    <div class="progress-box">
+      <div class="progress-number" id="progressNumber">0/5</div>
+      <div id="progressText">Você ainda não marcou nenhum critério de aprendizagem.</div>
+    </div>
+  </section>
+
+  <section class="section" id="conclusao">
+    <div class="card conclusion">
+      <h2 class="section-title" style="margin-top:0">Conclusão</h2>
+      <p>
+        A investigação mostrou que a Inteligência Artificial pode ser uma ferramenta valiosa no estudo de Biologia, principalmente para explicar processos, organizar conceitos e revisar conteúdos. No entanto, ela não substitui o aprendizado real. O aluno precisa interpretar, verificar, praticar e desenvolver autonomia. Portanto, a IA só contribui de forma positiva quando é usada com responsabilidade, honestidade acadêmica e pensamento crítico.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <div>Projeto escolar sobre IA nos estudos • Biologia • BioIA</div>
+    <div class="footer-school">
+      <img src="images/logo-colegio.avif" alt="Logo Colégio Cometa">
+      <span>Colégio Cometa • 3 Urano</span>
+    </div>
+  </footer>
+
+  <button class="top-btn" onclick="window.scrollTo({top:0, behavior:'smooth'})">↑</button>
+
+  <script>
+    function melhorarPergunta(){
+      const input = document.getElementById('userQuestion').value.trim().toLowerCase();
+      const result = document.getElementById('resultBox');
+
+      if(!input){
+        result.innerHTML = 'Digite uma pergunta para receber uma versão melhorada.';
+        return;
+      }
+
+      let melhor = '';
+      let dica = '';
+
+      if(input.includes('fotoss') || input.includes('fotossíntese')){
+        melhor = 'Explique a fotossíntese passo a passo, em linguagem simples, e diga qual é a função da luz solar, da água e do gás carbônico.';
+        dica = 'Essa pergunta ficou melhor porque pede etapas, linguagem clara e os elementos centrais do processo.';
+      } else if(input.includes('respiração celular') || input.includes('respiracao celular')){
+        melhor = 'Explique a respiração celular em etapas, com linguagem simples, e diga qual é a função do ATP nesse processo.';
+        dica = 'Essa versão pede organização e destaca um conceito importante: produção de energia.';
+      } else if(input.includes('dna')){
+        melhor = 'Explique o que é DNA de forma simples, diga sua função no corpo e dê um exemplo de como ele se relaciona com hereditariedade.';
+        dica = 'A pergunta ficou melhor porque pede definição, função e aplicação.';
+      } else if(input.includes('mitose') || input.includes('meiose')){
+        melhor = 'Compare mitose e meiose de forma simples, mostrando objetivo, número de células formadas e quantidade de cromossomos.';
+        dica = 'Essa formulação melhora a resposta porque transforma a dúvida em comparação objetiva.';
+      } else if(input.includes('suar') || input.includes('emagrece')){
+        melhor = 'Explique cientificamente se suar mais significa emagrecer mais, diferenciando perda de água e perda de gordura.';
+        dica = 'A nova pergunta ficou melhor porque separa senso comum de explicação científica.';
+      } else if(input.includes('digest') || input.includes('sistema digest')){
+        melhor = 'Explique como funciona o sistema digestório em ordem, dizendo a função de cada órgão principal e o que acontece com os alimentos.';
+        dica = 'Essa pergunta melhora a resposta porque pede sequência e função.';
+      } else {
+        melhor = 'Seja mais específico: peça explicação simples, exemplo, etapas e comparação com o que você já estudou.';
+        dica = 'Perguntas melhores geram respostas melhores. Quanto mais clara a dúvida, melhor a IA consegue ajudar.';
+      }
+
+      result.innerHTML = '<strong>Pergunta melhor:</strong><br>' + melhor + '<br><br><strong>Dica:</strong><br>' + dica;
+    }
+
+    const checks = document.querySelectorAll('.check-item');
+    const progressNumber = document.getElementById('progressNumber');
+    const progressText = document.getElementById('progressText');
+
+    function updateProgress(){
+      let done = 0;
+      checks.forEach(item => { if(item.checked) done++; });
+      progressNumber.textContent = `${done}/5`;
+
+      if(done === 0){
+        progressText.textContent = 'Você ainda não marcou nenhum critério de aprendizagem.';
+      } else if(done < 5){
+        progressText.textContent = 'Você está no caminho, mas ainda precisa conferir se realmente aprendeu.';
+      } else {
+        progressText.textContent = 'Ótimo: todos os critérios foram marcados. Isso indica uso mais consciente da IA.';
+      }
+    }
+
+    checks.forEach(item => item.addEventListener('change', updateProgress));
+  </script>
+</body>
+</html>
